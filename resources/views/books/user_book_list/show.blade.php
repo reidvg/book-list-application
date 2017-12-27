@@ -2,12 +2,14 @@
 @section('content')
     <div class="container-fluid">
         <h2>{{ $model->name }}</h2>
+        @include('books.errors')
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Image</th>
                     <th>Title</th>
                     <th>Author</th>
+                    <th>Owner</th>
                     <th>Description</th>
                     <th>Publication Date</th>
                     <th></th>
@@ -20,13 +22,15 @@
                         <td><img src="/images/{{ $bookList->book->image }}"></td>
                         <td><a href="/book/{{ $bookList->book->id }}">{{ $bookList->book->title }}</a></td>
                         <td>{{ $bookList->book->author }}</td>
+                        <td>{{ App\User::find($bookList->book->creator_id)->name }}</td>
                         <td>{{ $bookList->book->description }}</td>
                         <td>{{ $bookList->book->publication_date }}</td>
                         <td>
-                            <a class="btn btn-warning" href="/book/{{ $bookList->book->id }}/edit">Edit</a>
-                            {!! Form::open(['method' => 'DELETE','route' => ['book.destroy', $bookList->book->id], 'style'=> 'display: inline']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            @if(Auth::check())
+                                @if($bookList->book->creator_id == Auth::user()->id)
+                                <a class="btn btn-warning" href="/book/{{ $bookList->book->id }}/edit">Edit Book</a>
+                                @endif
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -38,7 +42,9 @@
             </tbody>
         </table>
         <div class="text-right">
-            <a class="btn btn-success" href="{{ route('book.create') }}">Add Books to List</a>
+            @if(Auth::check())
+            <a class="btn btn-success" href="{{ route('book-list.reading-list.index', $model->id) }}">Modify Books List</a>
+            @endif
         </div>
     </div>
 @endsection

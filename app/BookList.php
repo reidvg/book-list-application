@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookList extends Model
 {
     protected $table = 'book_list';
+    protected $fillable = ['user_book_list_id', 'book_id'];
 
     public function book()
     {
@@ -15,7 +16,7 @@ class BookList extends Model
 
     public function userBookList()
     {
-        return $this->hasOne('App\UserBookList');
+        return $this->hasOne('App\UserBookList', 'id', 'user_book_list_id');
     }
 
 }

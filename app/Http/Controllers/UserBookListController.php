@@ -15,7 +15,8 @@ class UserBookListController extends Controller
      */
     public function index()
     {
-        return view('books.user_book_list.index');
+        $book_lists = UserBookList::where(['user_id' => Auth::user()->id])->get();
+        return view('books.user_book_list.index', ['book_lists' => $book_lists]);
     }
 
     /**
@@ -43,7 +44,7 @@ class UserBookListController extends Controller
         $list = $request->all();
         $list['user_id'] = Auth::user()->id;
         UserBookList::create($list);
-        return redirect()->route('user-book-list.index')->with('success','Your book list has been created.');
+        return redirect()->route('book-list.index')->with('success','Your book list has been created.');
     }
 
     /**
@@ -58,7 +59,7 @@ class UserBookListController extends Controller
             $user_book_list = UserBookList::where(['id' => $id])->first();
             return view('books.user_book_list.show', ['model' => $user_book_list]);
         }
-        return redirect('/user-book-list');
+        return redirect()->route('book-list');
     }
 
     /**

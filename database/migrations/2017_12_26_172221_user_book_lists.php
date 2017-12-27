@@ -15,7 +15,7 @@ class UserBookLists extends Migration
     {
         Schema::create('user_book_lists', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->longText('description');
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('book_list_id')->nullable(true)->default();
