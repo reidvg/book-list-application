@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 /* CRUD Controllers */
-Route::resource('user-book-list', 'UserBookListController');
+Route::resource('book-list', 'UserBookListController');
+Route::resource('book', 'BookController');

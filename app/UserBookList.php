@@ -18,7 +18,7 @@ class UserBookList extends Model
 
     public function books()
     {
-        return $this->hasMany('App\BookList');
+        return $this->hasMany('App\Book');
     }
 
 

@@ -69,11 +69,13 @@ class UserBookListController extends Controller
      */
     public function edit($id)
     {
-        if(isset($id)) {
+        if(isset($id) and is_numeric($id)) {
             $user_book_list = UserBookList::where(['id' => $id])->first();
-            return view('books.user_book_list.edit', ['model' => $user_book_list]);
+            if($user_book_list) {
+                return view('books.user_book_list.edit', ['model' => $user_book_list]);
+            }
         }
-        return redirect('/user-book-list');
+        return redirect()->route('book-list.index')->with('error', "There is no book list with that ID: $id");
     }
 
     /**
@@ -91,7 +93,7 @@ class UserBookListController extends Controller
         ]);
 
         UserBookList::find($id)->update($request->all());
-        return redirect()->route('user-book-list.index')->with('success','Your book list has been updated.');
+        return redirect()->route('book-list.index')->with('success','Your book list has been updated.');
     }
 
     /**
@@ -103,6 +105,6 @@ class UserBookListController extends Controller
     public function destroy($id)
     {
         UserBookList::find($id)->delete();
-        return redirect()->route('user-book-list.index')->with('success','Your book list was deleted successfully');
+        return redirect()->route('book-list.index')->with('success','Your book list was deleted successfully');
     }
 }

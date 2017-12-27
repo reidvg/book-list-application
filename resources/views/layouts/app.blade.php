@@ -12,6 +12,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        tr td:first-child {
+            width: 10%;
+        }
+        tr td:last-child {
+            width: 10%;
+        }
+
+        td img {
+            max-height: 100px;
+            max-width: 100px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -46,7 +59,8 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a href="{{ route('user-book-list.index') }}">My Book Lists</a></li>
+                            <li><a href="{{ route('book.index') }}">My Books</a></li>
+                            <li><a href="{{ route('book-list.index') }}">My Book Lists</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -72,8 +86,8 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
+        @yield('footer')
     </div>
 
     <!-- Scripts -->

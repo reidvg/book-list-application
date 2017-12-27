@@ -18,7 +18,7 @@ class BookDetail extends Migration
             $table->string('author');
             $table->string('title');
             $table->longText('description');
-            $table->string('image');
+            $table->string('image')->nullable(true);
             $table->date('publication_date');
             $table->boolean('public');
             $table->unsignedInteger('creator_id')->index();

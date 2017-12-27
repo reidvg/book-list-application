@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="/user-book-list">Go to My Book Lists</a>
-                    @include('books.my_book_lists')
+                    <a href="/book-list">Go to My Book Lists</a>
                 </div>
             </div>
         </div>

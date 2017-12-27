@@ -15,14 +15,14 @@ $book_lists = App\UserBookList::all();
     <tbody>
     @foreach($book_lists as $book_list)
         <tr>
-            <td><a href="/user-book-list/{{ $book_list->id }}">{{ $book_list->name }}</a></td>
+            <td><a href="{{ route('book-list.show', $book_list->id) }}">{{ $book_list->name }}</a></td>
             <td>{{ $book_list->description }}</td>
             <td>{{ ($book_list->public) ? 'Yes' : 'No' }}</td>
             <td>{{ $book_list->updated_at }}</td>
             <td>{{ $book_list->created_at }}</td>
             <td>
-                <a class="btn btn-warning" href="/user-book-list/{{ $book_list->id }}/edit">Edit</a>
-                {!! Form::open(['method' => 'DELETE','route' => ['user-book-list.destroy', $book_list->id], 'style'=> 'display: inline']) !!}
+                <a class="btn btn-warning" href="/book-list/{{ $book_list->id }}/edit">Edit</a>
+                {!! Form::open(['method' => 'DELETE','route' => ['book-list.destroy', $book_list->id], 'style'=> 'display: inline']) !!}
                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
             </td>
@@ -31,5 +31,5 @@ $book_lists = App\UserBookList::all();
     </tbody>
 </table>
 <div class="text-right">
-    <a class="btn btn-success" href="/user-book-list/create">Create New Book List</a>
+    <a class="btn btn-success" href="/book-list/create">Create New Book List</a>
 </div>
