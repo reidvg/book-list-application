@@ -56,8 +56,16 @@ class UserBookListController extends Controller
     public function show($id)
     {
         if(isset($id)) {
-            $user_book_list = UserBookList::where(['id' => $id])->first();
-            return view('books.user_book_list.show', ['model' => $user_book_list]);
+            $model = UserBookList::where(['id' => $id])->first();
+            $books = $model->books;
+            $all_books = [];
+            foreach ($books as $book) {
+                if ($book->public == true or (isset(Auth::user()->id) and $book->creator_id == Auth::user()->id)) {
+                    $all_books[] = $book;
+                }
+            }
+
+            return view('books.user_book_list.show', ['model' => $model, 'books' => $all_books]);
         }
         return redirect()->route('book-list');
     }

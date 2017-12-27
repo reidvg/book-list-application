@@ -5,7 +5,7 @@
         <th>Description</th>
         <th>Owner</th>
         <th>Public</th>
-        <th>Updated Date</th>
+        <th>Updated</th>
         <th>Created Date</th>
         <th></th>
     </tr>
@@ -20,12 +20,13 @@
             <td>{{ $book_list->updated_at }}</td>
             <td>{{ $book_list->created_at }}</td>
             <td>
-                @if(Auth::check() == false)
+                @if(Auth::check())
                     @if($book_list->user_id == Auth::user()->id)
-                    <a class="btn btn-warning" href="/book-list/{{ $book_list->id }}/edit">Edit</a>
-                    {!! Form::open(['method' => 'DELETE','route' => ['book-list.destroy', $book_list->id], 'style'=> 'display: inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                        <a class="btn btn-success" href="{{ route('book-list.reading-list.index', $book_list->id) }}">Modify List</a>
+                        <a class="btn btn-warning" href="/book-list/{{ $book_list->id }}/edit">Edit</a>
+                        {!! Form::open(['method' => 'DELETE','route' => ['book-list.destroy', $book_list->id], 'style'=> 'display: inline']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
                     @endif
                 @endif
             </td>
@@ -33,6 +34,3 @@
     @endforeach
     </tbody>
 </table>
-<div class="text-right">
-    <a class="btn btn-success" href="/book-list/create">Create New Book List</a>
-</div>

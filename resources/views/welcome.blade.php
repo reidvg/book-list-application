@@ -1,8 +1,8 @@
-@extends('layouts.public')
+@extends('layouts.app')
 @section('content')
     <div class="container-fluid">
 
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             <div class="title m-b-md">
                 <h1>All Book Lists</h1>
                 <p>Welcome to my book list application! Here you can see all public book lists.</p>

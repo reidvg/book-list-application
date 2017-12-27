@@ -14,6 +14,7 @@
                 <th>In List</th>
                 <th>Image</th>
                 <th>Title</th>
+                <th>Owner</th>
                 <th>Author</th>
             </tr>
             </thead>
@@ -28,8 +29,15 @@
                             {!! Form::checkbox($book->id, 1) !!}
                         @endif
                     </td>
-                    <td><img src="/images/{{ $book->image }}"/></td>
+                    <td>
+                        @if($book->image)
+                            <img src="/images/{{ $book->image }}"/>
+                        @else
+                            No Image
+                        @endif
+                    </td>
                     <td><a href="/book/{{ $book->id }}">{{ $book->title }}</a></td>
+                    <td>{{ App\User::find($book->creator_id)->name }}</td>
                     <td>{{ $book->publication_date }}</td>
                 </tr>
             @endforeach

@@ -18,7 +18,6 @@ class UserBookLists extends Migration
             $table->string('name');
             $table->longText('description');
             $table->unsignedInteger('user_id')->index();
-            $table->unsignedInteger('book_list_id')->nullable(true)->default();
             $table->boolean('public');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

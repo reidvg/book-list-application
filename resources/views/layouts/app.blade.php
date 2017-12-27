@@ -18,7 +18,7 @@
             width: 10%;
         }
         tr td:last-child {
-            width: 10%;
+            width: 20%;
         }
 
         td img {
@@ -49,9 +49,16 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Home
-                    </a>
+                    <a class="navbar-brand">|</a>
+                    @if(Auth::check())
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                            Home
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Home
+                        </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -94,8 +101,11 @@
                 </div>
             </div>
         </nav>
-        @yield('content')
-        @yield('footer')
+        <div class="container-fluid">
+            <div class="col-md-10 col-md-offset-1">
+                @yield('content')
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->

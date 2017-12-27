@@ -9,6 +9,7 @@
                 <th>Image</th>
                 <th>Title</th>
                 <th>Author</th>
+                <th>Public</th>
                 <th>Description</th>
                 <th>Publication Date</th>
                 <th></th>
@@ -17,9 +18,16 @@
             <tbody>
                 @foreach($model as $book)
                     <tr>
-                        <td><img src="images/{{ $book->image }}"/></td>
+                        <td>
+                            @if($book->image)
+                            <img src="images/{{ $book->image }}"/>
+                            @else
+                            No Image
+                            @endif
+                        </td>
                         <td><a href="/book/{{ $book->id }}">{{ $book->title }}</a></td>
                         <td>{{ $book->author }}</td>
+                        <td>{{ ($book->public) ? 'Yes' : 'No' }}</td>
                         <td>{{ $book->description }}</td>
                         <td>{{ $book->publication_date }}</td>
                         <td><a class="btn btn-warning" href="/book/{{ $book->id }}/edit">Edit</a>

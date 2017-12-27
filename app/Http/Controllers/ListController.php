@@ -20,17 +20,19 @@ class ListController extends Controller
         $user_list = UserBookList::find($book_list_id);
         $books = Book::where(['creator_id' => Auth::user()->id])->orWhere(['public' => true])->get();
         $all_books = [];
-        foreach ($books as $book){
-            if($book->belongsToList) {
-                if($book->belongsToList->userBookList) {
-                    $book->in_list = true;
-                    $all_books[] = $book;
-                    continue;
-                }
-            }
+
+        foreach ($books as $book) {
             $book->in_list = false;
-            $all_books[] = $book;
+            $all_books[$book->id] = $book;
         }
+
+        foreach($user_list->books as $book) {
+            $book->in_list = true;
+            if($book->public == true or (isset(Auth::user()->id) and $book->creator_id == Auth::user()->id)) {
+                $all_books[$book->id] = $book;
+            }
+        }
+
         return view('books.reading-list.index', [
             'model' => $user_list,
             'books' => $all_books,
@@ -40,31 +42,30 @@ class ListController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)
     {
-
         $post = $request->except('_token');
         $user_list = UserBookList::find($id);
         // Delete All Old Books
-        BookList::where('user_book_list_id', $user_list->book_list_id)->delete();
+        BookList::where('user_book_list_id', $user_list->id)->delete();
 
         foreach ($post as $book_id => $in_list) {
-            if($in_list) {
+            if ($in_list) {
                 BookList::create([
-                    'user_book_list_id' => $user_list->book_list_id,
+                    'user_book_list_id' => $user_list->id,
                     'book_id' => $book_id
                 ]);
             }
         }
-        $count = count(BookList::where('user_book_list_id', $user_list->book_list_id)->get());
+        $count = count(BookList::where('user_book_list_id', $user_list->id)->get());
         $books = 'books';
-        if($count == 1) {
+        if ($count == 1) {
             $books = 'book';
         }
-        return redirect()->route('book-list.show', $user_list->book_list_id)->with('success',"Your book list now has $count $books.");
+        return redirect()->route('book-list.show', $user_list->id)->with('success', "Your book list now has $count $books.");
     }
 
 }

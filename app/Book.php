@@ -14,6 +14,6 @@ class Book extends Model
 
     public function belongsToList()
     {
-        return $this->belongsTo('App\BookList', 'id', 'book_id');
+        return $this->belongsToMany('App\UserBookList', 'book_list');
     }
 }

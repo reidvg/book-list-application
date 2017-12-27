@@ -16,19 +16,25 @@
                 </tr>
             </thead>
             <tbody>
-            @if(count($model->bookList) > 0)
-                @foreach($model->bookList as $bookList)
+            @if(count($books) > 0)
+                @foreach($books as $book)
                     <tr>
-                        <td><img src="/images/{{ $bookList->book->image }}"></td>
-                        <td><a href="/book/{{ $bookList->book->id }}">{{ $bookList->book->title }}</a></td>
-                        <td>{{ $bookList->book->author }}</td>
-                        <td>{{ App\User::find($bookList->book->creator_id)->name }}</td>
-                        <td>{{ $bookList->book->description }}</td>
-                        <td>{{ $bookList->book->publication_date }}</td>
+                        <td>
+                            @if($book->image)
+                                <img src="/images/{{ $book->image }}"/>
+                            @else
+                                No Image
+                            @endif
+                        </td>
+                        <td><a href="/book/{{ $book->id }}">{{ $book->title }}</a></td>
+                        <td>{{ $book->author }}</td>
+                        <td>{{ App\User::find($book->creator_id)->name }}</td>
+                        <td>{{ $book->description }}</td>
+                        <td>{{ $book->publication_date }}</td>
                         <td>
                             @if(Auth::check())
-                                @if($bookList->book->creator_id == Auth::user()->id)
-                                <a class="btn btn-warning" href="/book/{{ $bookList->book->id }}/edit">Edit Book</a>
+                                @if($book->creator_id == Auth::user()->id)
+                                <a class="btn btn-warning" href="/book/{{ $book->id }}/edit">Edit Book</a>
                                 @endif
                             @endif
                         </td>
@@ -42,7 +48,7 @@
             </tbody>
         </table>
         <div class="text-right">
-            @if(Auth::check())
+            @if(Auth::check() and $model->user_id == Auth::user()->id)
             <a class="btn btn-success" href="{{ route('book-list.reading-list.index', $model->id) }}">Modify Books List</a>
             @endif
         </div>

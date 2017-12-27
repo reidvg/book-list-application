@@ -50,9 +50,15 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     <a class="navbar-brand">|</a>
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Home
-                    </a>
+                    @if(Auth::check())
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                            Home
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Home
+                        </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

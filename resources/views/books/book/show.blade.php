@@ -10,7 +10,11 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-md-3 col-xs-3 col-sm-3 col-md-offset-2 col-xs-offset-2 col-sm-offset-2">
-            <img src="/images/{{$model->image}}">
+            @if($model->image)
+                <img src="/images/{{ $model->image }}"/>
+            @else
+                No Image
+            @endif
         </div>
         <div class="col-md-5 col-xs-5 col-sm-5">
             <h2>{{ $model->title }}</h2>
