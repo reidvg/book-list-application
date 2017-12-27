@@ -14,8 +14,8 @@ class BookList extends Migration
     public function up()
     {
         Schema::create('book_list', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('book_id')->index();
+            $table->unsignedInteger('user_book_list_id')->nullable(true)->index();
+            $table->unsignedInteger('book_id');
             $table->timestamps();
         });
     }

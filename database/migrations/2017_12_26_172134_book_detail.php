@@ -13,14 +13,17 @@ class BookDetail extends Migration
      */
     public function up()
     {
-        Schema::create('book_detail', function (Blueprint $table) {
+        Schema::create('book', function (Blueprint $table) {
             $table->increments('id');
             $table->string('author');
-            $table->string('title')->index();
+            $table->string('title');
             $table->longText('description');
             $table->string('image');
-            $table->dateTime('publication_date');
+            $table->date('publication_date');
+            $table->boolean('public');
+            $table->unsignedInteger('creator_id')->index();
             $table->timestamps();
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -31,6 +34,9 @@ class BookDetail extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_detail');
+        Schema::table('book', function (Blueprint $table) {
+            $table->dropForeign(['creator_id']);
+        });
+        Schema::dropIfExists('book');
     }
 }

@@ -14,7 +14,8 @@ class BookListDetailRelation extends Migration
     public function up()
     {
         Schema::table('book_list', function (Blueprint $table) {
-            $table->foreign('book_id')->references('id')->on('book_detail')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
+            $table->foreign('user_book_list_id')->references('id')->on('user_book_lists')->onDelete('cascade');
         });
     }
 
@@ -26,7 +27,7 @@ class BookListDetailRelation extends Migration
     public function down()
     {
         Schema::table('book_list', function (Blueprint $table) {
-            $table->dropForeign(['book_id']);
+            $table->dropForeign(['book_id', 'user_book_list_id']);
         });
     }
 }
