@@ -8,9 +8,9 @@ class BookList extends Model
 {
     protected $table = 'book_list';
 
-    public function books()
+    public function book()
     {
-        return $this->hasMany('App\Book', 'id');
+        return $this->hasOne('App\Book', 'id', 'book_id');
     }
 
     public function userBookList()

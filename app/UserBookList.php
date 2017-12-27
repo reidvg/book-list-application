@@ -16,5 +16,10 @@ class UserBookList extends Model
         return $this->hasMany('App\BookList', 'user_book_list_id');
     }
 
+    public function books()
+    {
+        return $this->hasMany('App\BookList');
+    }
+
 
 }
