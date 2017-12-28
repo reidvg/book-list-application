@@ -10,15 +10,15 @@
 <div class="col-xs-6 col-sm-6 col-md-6">
     <div class="form-group">
         <strong>Title:</strong>
-        {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
+        {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control typeahead')) !!}
     </div>
     <div class="form-group">
         <strong>Author:</strong>
-        {!! Form::text('author', null, array('placeholder' => 'Author','class' => 'form-control')) !!}
+        {!! Form::text('author', null, array('placeholder' => 'Author','class' => 'form-control', 'id' => 'author')) !!}
     </div>
     <div class="form-group" style="width: 25%;">
         <strong>Publication Date:</strong>
-        {!! Form::date('publication_date', null, array('placeholder' => 'Publication Date','class' => 'form-control')) !!}
+        {!! Form::date('publication_date', null, array('placeholder' => 'Publication Date','class' => 'form-control', 'id' => 'publication_date')) !!}
     </div>
     <div class="form-group">
         <strong>Public:</strong>
@@ -30,7 +30,7 @@
 <div class="col-xs-8 col-sm-8 col-md-8 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
     <div class="form-group">
         <strong>Description:</strong>
-        {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
+        {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control', 'id' => 'description')) !!}
     </div>
 </div>
 <div class="col-xs-8 col-sm-8 col-md-8 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 text-right">

@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('book-list', 'UserBookListController');
 Route::resource('book-list.reading-list', 'ListController')->only(['index', 'store']);
 Route::resource('book', 'BookController');
+
+Route::get('/book-api/{query?}', 'BookAPIController@index')->name('book-api');
