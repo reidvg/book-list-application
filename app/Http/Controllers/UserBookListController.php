@@ -61,8 +61,8 @@ class UserBookListController extends Controller
      */
     public function show($id)
     {
-        if(isset($id)) {
-            $model = UserBookList::where(['id' => $id])->first();
+        $model = UserBookList::where(['id' => $id])->first();
+        if(!empty($model)) {
             $books = $model->books;
             $all_books = [];
             foreach ($books as $book) {
@@ -73,7 +73,7 @@ class UserBookListController extends Controller
 
             return view('books.user_book_list.show', ['model' => $model, 'books' => $all_books]);
         }
-        return redirect()->route('book-list');
+        return redirect()->route('home')->with('error', "There is no book list with that ID: $id");
     }
 
     /**

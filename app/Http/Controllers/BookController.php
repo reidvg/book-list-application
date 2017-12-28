@@ -81,7 +81,7 @@ class BookController extends Controller
                 return view('books.book.show', ['model' => $book]);
             }
         }
-        return redirect()->route('book.index')->with('error', "There is no book list with that ID: $id");
+        return redirect()->route('book.index')->with('error', "There is no book with that ID: $id");
     }
 
     /**
@@ -98,7 +98,7 @@ class BookController extends Controller
                 return view('books.book.edit', ['model' => $book]);
             }
         }
-        return redirect()->route('book.index')->with('error', "There is no book list with that ID: $id");
+        return redirect()->route('book.index')->with('error', "There is no book with that ID: $id");
     }
 
     /**

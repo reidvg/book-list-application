@@ -5,6 +5,7 @@
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading"><h3>Welcome to my Book List Application {{Auth::user()->name}}!</h3></div>
+                @include('books.errors')
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">

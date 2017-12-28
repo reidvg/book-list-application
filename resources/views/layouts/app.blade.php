@@ -32,6 +32,13 @@
         .table tbody tr td {
             vertical-align: middle;
         }
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
 
     </style>
 </head>
@@ -52,7 +59,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <i class="fa fa-book"></i> {{ config('app.name', 'Laravel') }}
                 </a>
                 <a class="navbar-brand">|</a>
                 @if(Auth::check())
@@ -79,12 +86,12 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-                        <li><a href="{{ route('book.index') }}">My Books</a></li>
-                        <li><a href="{{ route('book-list.index') }}">My Book Lists</a></li>
+                        <li><a href="{{ route('book.index') }}"><i class="fa-book fa"></i> My Books</a></li>
+                        <li><a href="{{ route('book-list.index') }}"><i class="fa-list fa"></i> My Book Lists</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false" aria-haspopup="true">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <i class="fa-user fa"></i> {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu">

@@ -3,8 +3,12 @@
     <div class="container-fluid">
         <h1>My Books</h1>
         @include('books.errors')
-        @if(count($model) > 0)
-            <p>Now that you have added a book, you can add it to a list <a href="/book-list">here.</a></p>
+        @if(count($model) == 0)
+            <p>Now that you have added a book, you can add it to a list <a href="/book-list">here.</a> Or use the My Book Lists link on the top menu bar. </p>
+        @elseif(count($model) > 0)
+            <p>Now that you have added some books, you can them to a list <a href="/book-list">here.</a> Or use the My Book Lists link on the top menu bar. </p>
+        @else
+            <p>You can create a book for your collection by clicking 'Create New Book' Below.</p>
         @endif
         <table class="table table-striped">
             <thead>

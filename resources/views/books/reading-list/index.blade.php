@@ -43,7 +43,7 @@
                     </td>
                     <td><a href="/book/{{ $book->id }}">{{ $book->title }}</a></td>
                     <td>{{ App\User::find($book->creator_id)->name }}</td>
-                    <td>{{ $book->publication_date }}</td>
+                    <td>{{ $book->author }}</td>
                 </tr>
             @endforeach
             </tbody>

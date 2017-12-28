@@ -24,25 +24,28 @@ class ListController extends Controller
     public function index($book_list_id)
     {
         $user_list = UserBookList::find($book_list_id);
-        $books = Book::where(['creator_id' => Auth::user()->id])->orWhere(['public' => true])->get();
-        $all_books = [];
+        if(!empty($user_list)) {
+            $books = Book::where(['creator_id' => Auth::user()->id])->orWhere(['public' => true])->get();
+            $all_books = [];
 
-        foreach ($books as $book) {
-            $book->in_list = false;
-            $all_books[$book->id] = $book;
-        }
-
-        foreach($user_list->books as $book) {
-            $book->in_list = true;
-            if($book->public == true or (isset(Auth::user()->id) and $book->creator_id == Auth::user()->id)) {
+            foreach ($books as $book) {
+                $book->in_list = false;
                 $all_books[$book->id] = $book;
             }
-        }
 
-        return view('books.reading-list.index', [
-            'model' => $user_list,
-            'books' => $all_books,
-        ]);
+            foreach ($user_list->books as $book) {
+                $book->in_list = true;
+                if ($book->public == true or (isset(Auth::user()->id) and $book->creator_id == Auth::user()->id)) {
+                    $all_books[$book->id] = $book;
+                }
+            }
+
+            return view('books.reading-list.index', [
+                'model' => $user_list,
+                'books' => $all_books,
+            ]);
+        }
+        return redirect()->route('book-list.index')->with('error', "There is no book list with that ID: $book_list_id");
     }
 
     /**
