@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class UserBookListController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'edit']);
+    }
     /**
      * Display a listing of the resource.
      *
