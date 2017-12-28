@@ -3,6 +3,9 @@
     <div class="container-fluid">
         <h1>My Books</h1>
         @include('books.errors')
+        @if(count($model) > 0)
+            <p>Now that you have added a book, you can add it to a list <a href="/book-list">here.</a></p>
+        @endif
         <table class="table table-striped">
             <thead>
             <tr>

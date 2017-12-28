@@ -2,6 +2,11 @@
 @section('content')
     <div class="container-fluid">
         <h1>Add Books to {{$model->name}}</h1>
+        @if(count($model->books) == 0)
+            <p>Select the books using the checkboxes in the right hand column and hit <strong>'Save Book List'</strong> when you are happy with your selection.</p>
+        @else
+            <p><strong>Sweet!</strong> You can view your book list from <a href="/book-list/{{$model->id}}">here</a>, or the <a href="/">home page</a> if its public</p>
+        @endif
         {!! Form::open(['method' => 'POST','route' => ['book-list.reading-list.store', $model->id]]) !!}
         @include('books.errors')
         <div class="text-right">

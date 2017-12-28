@@ -44,6 +44,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:1000',
+            'author' => 'required|max:255',
             'publication_date' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -106,6 +107,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:1000',
+            'author' => 'required|max:255',
             'publication_date' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -116,14 +118,12 @@ class BookController extends Controller
             return redirect()->route('book.index')->with('error','Failed to update your book.');
         }
 
-        $this->removeOldImage($id);
-
         Book::find($id)->update($post);
         return redirect()->route('book.index')->with('success','Your book has been updated.');
 
     }
 
-    private function validateImage($request)
+    private function validateImage($request, $id = null)
     {
         $post = $request->except('_token');
         if($request->hasFile('image')) {
@@ -132,6 +132,9 @@ class BookController extends Controller
             $destination = public_path('/images');
             if($image->move($destination, $name)) {
                 $post['image'] = $name;
+                if(!is_null($id)) {
+                    $this->removeOldImage($id);
+                }
                 return $post;
             }
             return false;
