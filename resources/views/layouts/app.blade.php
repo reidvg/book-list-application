@@ -12,7 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
         tr td:first-child {
             width: 10%;
@@ -30,6 +32,7 @@
         .table tbody tr td {
             vertical-align: middle;
         }
+
     </style>
 </head>
 <body>
@@ -116,8 +119,10 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <script>
     $(document).ready(function () {
+
         $('.typeahead').typeahead({
             hint: true,
             highlight: true,
@@ -160,7 +165,15 @@
                 $('#description').html(item.title_suggest);
             }
         });
+
+        $('table').dataTable({
+            dom: 'fti',
+            order: []
+        });
+
+        $("input[type=search]").addClass('form-control')
     });
 </script>
+@yield('js-specific')
 </body>
 </html>

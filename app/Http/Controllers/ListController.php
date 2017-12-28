@@ -68,4 +68,22 @@ class ListController extends Controller
         return redirect()->route('book-list.show', $user_list->id)->with('success', "Your book list now has $count $books.");
     }
 
+    public function updateListOrder()
+    {
+        // Update the sequence
+        $book_orders = $_POST['book'];
+        $list_id = $_POST['list_id'];
+
+        $book_list = BookList::where('user_book_list_id', $list_id)->get();
+        foreach ($book_orders as $order=>$book_id) {
+            foreach ($book_list as $list) {
+                if($list->book_id == $book_id) {
+                    $list->sequence = $order;
+                    $list->update();
+                }
+            }
+        }
+
+    }
+
 }

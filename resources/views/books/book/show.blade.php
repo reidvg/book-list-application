@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="col-md-3 col-xs-3 col-sm-3 col-md-offset-2 col-xs-offset-2 col-sm-offset-2">
             @if($model->image)
-                <img src="/images/{{ $model->image }}"/>
+                <img src="/images/{{ $model->image }}"/><span hidden>{{$model->image}}</span>
             @else
                 No Image
             @endif

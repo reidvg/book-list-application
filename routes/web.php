@@ -24,3 +24,5 @@ Route::resource('book-list.reading-list', 'ListController')->only(['index', 'sto
 Route::resource('book', 'BookController');
 
 Route::get('/book-api/{query?}', 'BookAPIController@index')->name('book-api');
+
+Route::post('/book-order', 'ListController@updateListOrder')->name('book-order');

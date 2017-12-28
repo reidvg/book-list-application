@@ -18,7 +18,7 @@ class UserBookList extends Model
 
     public function books()
     {
-        return $this->hasManyThrough('App\Book', 'App\BookList', 'user_book_list_id', 'id', 'id', 'book_id');
+        return $this->hasManyThrough('App\Book', 'App\BookList', 'user_book_list_id', 'id', 'id', 'book_id')->orderBy('sequence');
     }
 
 

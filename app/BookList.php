@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookList extends Model
 {
     protected $table = 'book_list';
-    protected $fillable = ['user_book_list_id', 'book_id'];
+    protected $fillable = ['user_book_list_id', 'book_id', 'sequence'];
 
     public function book()
     {
