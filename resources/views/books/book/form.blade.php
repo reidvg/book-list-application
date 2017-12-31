@@ -16,7 +16,7 @@
         <strong>Author:</strong>
         {!! Form::text('author', null, array('placeholder' => 'Author','class' => 'form-control', 'id' => 'author')) !!}
     </div>
-    <div class="form-group" style="width: 25%;">
+    <div class="form-group" style="width: 50%;">
         <strong>Publication Date:</strong>
         {!! Form::date('publication_date', null, array('placeholder' => 'Publication Date','class' => 'form-control', 'id' => 'publication_date')) !!}
     </div>

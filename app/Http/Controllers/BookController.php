@@ -135,7 +135,8 @@ class BookController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time() . '.' .$image->getClientOriginalExtension();
-            $destination = public_path('/images');
+            $destination = public_path();
+            $destination = $destination . '_html/images';
             if($image->move($destination, $name)) {
                 $post['image'] = $name;
                 if(!is_null($id)) {
